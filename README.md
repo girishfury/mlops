@@ -1,40 +1,27 @@
-# Remove all emojis and special characters to ensure PDF generation works
-import re
-
-# Function to remove emojis and non-ASCII characters
-def clean_text(text):
-    return re.sub(r'[^\x00-\x7F]+', '', text)
-
-# Rebuild roadmap with clean text
-clean_roadmap = [(clean_text(title), clean_text(level), [clean_text(task) for task in tasks]) for title, level, tasks in roadmap]
-
-# Create PDF again with cleaned text
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Arial", size=12)
-
-# Title
-pdf.set_font("Arial", 'B', 14)
-pdf.cell(200, 10, txt="MLOps Roadmap (DevOps to MLOps - AWS Focused)", ln=True, align='C')
-pdf.ln(5)
-
-# Date
-pdf.set_font("Arial", size=10)
-pdf.cell(200, 10, txt=f"Generated: {datetime.date.today()}", ln=True, align='R')
-pdf.ln(10)
-
-# Render each phase in PDF again
-for phase_title, level, tasks in clean_roadmap:
-    clean_title = f"{phase_title} - {level}"
-    pdf.set_font("Arial", 'B', 12)
-    pdf.cell(200, 10, txt=clean_title, ln=True)
-    pdf.set_font("Arial", size=11)
-    for task in tasks:
-        pdf.cell(200, 8, txt=f"- [ ] {task}", ln=True)
-    pdf.ln(4)
-
-# Save PDF
-pdf_path = "/mnt/data/mlops_roadmap.pdf"
-pdf.output(pdf_path)
-
-pdf_path
+MLOps Roadmap (DevOps to MLOps - AWS Focused)
+Generated: 2025-06-21
+Phase 1: ML Basics (1 week) - Basic Knowledge
+- [ ] Understand ML lifecycle
+- [ ] Learn types of ML (supervised, unsupervised, etc.)
+- [ ] Watch ML intro videos (Google ML Crash Course)
+- [ ] Explore Kaggle notebook (Titanic/Iris)
+Phase 2: Model Training & Saving (1 week) - Basic Knowledge
+- [ ] Install Jupyter, pandas, scikit-learn
+- [ ] Train a basic model (Titanic/Iris)
+- [ ] Save model using joblib or pickle
+Phase 3: MLflow & DVC (1 week) - Good Hands
+- [ ] Install & use MLflow locally
+- [ ] Track parameters & metrics
+- [ ] Use DVC to version data
+- [ ] Push data/model to AWS S3
+Phase 4: Serve Model API + Docker (1.5 weeks) - Good Hands
+- [ ] Build FastAPI to serve model
+- [ ] Dockerize the app
+- [ ] Push image to Amazon ECR
+Phase 5: AWS Deployment (2 weeks) - Good Hands
+- [ ] Option 1: SageMaker Endpoint
+- [ ] Option 2: EC2 with Docker
+- [ ] Option 3: EKS + KServe/Seldon
+Phase 6: CI/CD Pipeline (1.5 weeks) - Good Hands
+- [ ] Automate train S3 deploy via Jenkins or GitHub Actions
+- [ ] Add CloudWatch or Prometheus for monitoring
