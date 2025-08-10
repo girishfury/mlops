@@ -1,0 +1,11 @@
+# prefect.yaml
+name: first-deployment-project
+prefect-version: 3.4.11
+
+deployments:
+- name: zoomcamp
+  description: 'Deployment to read data from a parquet file'
+  flow_name: read_data  # Flow name defined in data_read.py
+  entrypoint: task_03.py:start_pipeline  # File and flow function
+  work_pool:
+    name: zoom-pool  # Name of the work pool for the deployment
