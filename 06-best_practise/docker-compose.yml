@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    container_name: localstack
+    ports:
+      - "4566:4566"  # Unified API Gateway for all AWS services in Localstack
+    environment:
+      - SERVICES=s3  # Only enable the S3 service
+      - DEBUG=1      # Optional: Enable debug logging to see more verbose logs
